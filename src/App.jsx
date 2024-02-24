@@ -32,7 +32,8 @@ function App() {
       <button onClick={handlerClick}>
         Agregar
       </button> */}
-      <ListaTareas />
+      {/* <ListaTareas /> */}
+      <List />
       </div>
     </>
   )

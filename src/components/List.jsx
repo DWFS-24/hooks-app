@@ -1,16 +1,28 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
-const List = ({lista}) => {
+const List = () => {
+
+  const [ listState, setListState ] = useState([])
 
   useEffect(() => {
-    console.log('aqui es el useEffect',lista)
-  }, [lista]);
+    handlerRequest()
+  }, []);
+
+  const handlerRequest = async () => {
+    const results = await axios.get('https://www.amiiboapi.com/api/amiibo/')
+    console.log(results)
+    setListState(results.data.amiibo)
+  }
 
   return (
     <div>
-      <ul>
-        { lista.map((item)=> <li key={item}>{item}</li>) }
-      </ul>
+        { listState.map((item)=> <div key={item.tail}>
+          <p>
+            {item.character}
+          </p>
+          <img src={item.image} alt="" />
+        </div>) }
     </div>
   )
 }
